@@ -13,10 +13,12 @@ goingRight = true
 screenX = 1000
 screenY = 1000
 
-items = {}
+itemsTop = {}
+itemsBot = {}
 
-numOfPillars = 10
+numOfPillars = 5
 maxPillarSize = 300
+
 
 function love.load()
     
@@ -28,8 +30,10 @@ function love.load()
   local i = 0
   while (i < numOfPillars) 
   do
-    items[i] = { x = math.random() * screenX, xLength = math.random() * maxPillarSize}
-    
+    itemsTop[i] = {  x = math.random() * screenX, 
+                  xLength = math.random() * maxPillarSize
+                }
+        
   
     i = i + 1
   end
@@ -65,13 +69,14 @@ end
 function love.draw()
     love.graphics.print("Hello World!", 1000, 1000)
     love.graphics.circle("fill", x, y, 50, 25)
-    love.graphics.rectangle('fill', 50, 0, 25, 75)
+    
+    love.graphics.rectangle('fill', 150, (screenY - 100), 25, 105)
     
     local i = 0;
     
     while (i < numOfPillars) 
     do
-      love.graphics.rectangle('fill', items[i].x, 0, 25, items[i].xLength)
+      love.graphics.rectangle('fill', itemsTop[i].x, 0, 25, itemsTop[i].xLength)
       i = i + 1
     end
     
