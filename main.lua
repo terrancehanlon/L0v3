@@ -9,7 +9,7 @@ require "math"
 
 
 ballX = 100
-ballYy = 100
+ballY = 100
 
 goingLeft = false
 goingRight = true
@@ -49,32 +49,35 @@ end
 
 function love.update(dt)
   
-    if love.keyboard.isDown('a') then
+    if love.keyboard.isDown('space') then
       print('can do stuff here')
+      ballY = ballY - 5
     end
     
-    if x >= screenX then
+    if ballX >= screenX then
       goingLeft = true
       goingRight = false
     end
     
-    if x <= 0 then
+    if ballX <= 0 then
       goingLeft = false
       goingRight = true
     end
     
     if goingLeft then
-      x = x - 300 * dt
+      ballX = ballX - 300 * dt
     elseif goingRight then
-      x = x + 300 * dt
+      ballX = ballX + 300 * dt
     end
+    
+    ballY = ballY + 3
     
 end
 
 
 function love.draw()
     love.graphics.print("Hello World!", 1000, 1000)
-    love.graphics.circle("fill", x, y, 50, 25)
+    love.graphics.circle("fill", ballX, ballY, 50, 25)
     love.graphics.rectangle('fill', 150, (screenY - 100), 25, 105)
     
     local i = 0;
