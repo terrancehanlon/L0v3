@@ -7,9 +7,13 @@
 require "math"
 
 
-
+--start
 ballX = 100
 ballY = 100
+
+ballX_speed = 350
+ballY_speed = 590
+jump_y = 50
 
 goingLeft = false
 goingRight = true
@@ -28,7 +32,9 @@ maxPillarSize = 300
 pillarPadding = 15
 
 function love.load()
-    
+  
+  
+  world = love.physics.newWorld(0, 200, true)  
   love.window.setFullscreen(true)
   
   screenX = love.graphics.getWidth()
@@ -48,12 +54,15 @@ function love.load()
 end
 
 function love.update(dt)
-  
-    if love.keyboard.isDown('space') then
-      print('can do stuff here')
-      ballY = ballY - 5
-    end
+  --world:update(dt)
+  -- if love.keypressed
+  -- if love.keyboard.isDown("space") then
     
+    if love.keyboard.isDown("a") == true then
+      print('can do stuff here')
+      ballY = ballY - jump_y
+    end
+  
     if ballX >= screenX then
       goingLeft = true
       goingRight = false
@@ -67,12 +76,19 @@ function love.update(dt)
     if goingLeft then
       ballX = ballX - 300 * dt
     elseif goingRight then
-      ballX = ballX + 300 * dt
+      ballX = ballX + ballX_speed * dt
     end
-    
-    ballY = ballY + 3
+
+    ballY = ballY + ballY_speed * dt
     
 end
+
+--function love.keyreleased(key)
+   --if key == "space" then
+      --print('can do stuff here space')
+    --  ballY = ballY - ballY_speed
+  -- end
+--end
 
 
 function love.draw()
